@@ -49,13 +49,6 @@
             text-align: center;
         }
 
-        .logo {
-            max-width: 280px;
-            height: auto;
-            margin-bottom: 20px;
-            filter: brightness(1.1);
-        }
-
         .logo-container {
             margin-bottom: 15px;
         }
@@ -78,17 +71,24 @@
             line-height: 1.5;
         }
 
-        .divider {
-            text-align: center;
-            color: #666;
-            font-size: 18px;
-            margin: 20px 0;
-            font-weight: 300;
-        }
-
         .form-content {
             padding: 30px 25px;
         }
+
+        .question-wrapper {
+            display: none; /* Esconde todas as perguntas por padrão */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .question-wrapper.active {
+            display: block; /* Mostra apenas a pergunta ativa */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
 
         .question {
             margin-bottom: 30px;
@@ -104,7 +104,7 @@
             gap: 8px;
         }
 
-        .text-input {
+        .text-input, .textarea {
             width: 100%;
             padding: 15px;
             border: 2px solid #e1e8ed;
@@ -114,7 +114,7 @@
             background: #f8f9fa;
         }
 
-        .text-input:focus {
+        .text-input:focus, .textarea:focus {
             outline: none;
             border-color: #c8860d;
             background: white;
@@ -153,7 +153,7 @@
         }
 
         .radio-option input[type="radio"] {
-            margin: 0;
+            margin-top: 2px;
             transform: scale(1.2);
             accent-color: #c8860d;
         }
@@ -166,70 +166,93 @@
         }
 
         .textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e8ed;
-            border-radius: 10px;
-            font-size: 16px;
             font-family: inherit;
             resize: vertical;
             min-height: 100px;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
         }
 
-        .textarea:focus {
-            outline: none;
-            border-color: #c8860d;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(200, 134, 13, 0.1);
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
         }
 
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
+        .btn {
+            padding: 15px 25px;
             border: none;
             border-radius: 12px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 20px;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            flex-grow: 1; /* Faz o botão ocupar o espaço todo se for o único */
+        }
+        
+        .btn-prev {
+            background-color: #e1e8ed;
+            color: #1e3a5f;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            font-size: 18px;
+            padding: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
 
-        .submit-btn:hover {
+        .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
-        .submit-btn:active {
+        .btn:active {
             transform: translateY(-1px);
         }
-
-        .whatsapp-icon {
-            font-size: 20px;
+        
+        #submission-status {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 0.5s ease-in-out;
         }
+
+        #submission-status h2 {
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        #submission-status p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .hidden {
+            display: none;
+        }
+
 
         @media (max-width: 480px) {
             .container {
                 margin: 10px;
                 border-radius: 15px;
             }
-            
             .form-content {
                 padding: 20px;
             }
-            
             .header {
                 padding: 25px 20px;
             }
-            
             .header h1 {
                 font-size: 24px;
             }
@@ -241,172 +264,194 @@
         <div class="header">
             <div class="logo-container">
                 <svg width="300" height="120" viewBox="0 0 300 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Logo MD Symbol -->
                     <g transform="translate(115, 10)">
-                        <!-- M -->
                         <path d="M0 50H15L25 12H10L0 50Z" fill="#C8860D"/>
                         <path d="M35 50H50L40 12H25L35 50Z" fill="#C8860D"/>
-                        <!-- D -->
                         <path d="M15 50C35 50 50 35 50 15V0H15C5 0 0 5 0 15V35C0 45 5 50 15 50Z" fill="white" opacity="0.9"/>
                     </g>
-                    
-                    <!-- MARMODECOR Text -->
                     <text x="10" y="80" font-family="'Segoe UI', sans-serif" font-weight="800" font-size="28" fill="#C8860D">MARMO</text>
                     <text x="130" y="80" font-family="'Segoe UI', sans-serif" font-weight="800" font-size="28" fill="white">DECOR</text>
-                    
-                    <!-- Subtitle -->
                     <text x="10" y="100" font-family="'Segoe UI', sans-serif" font-weight="600" font-size="12" fill="white" opacity="0.9">CASA DO MÁRMORE E GRANITO</text>
                 </svg>
             </div>
             <p style="margin-top: 15px;">Atendimento Inteligente</p>
-            <p style="margin-top: 10px;">Tenha um atendimento mais rápido informando algumas informações abaixo:</p>
+            <p style="margin-top: 10px;">Responda as perguntas abaixo para agilizar seu atendimento:</p>
         </div>
         
         <div class="form-content">
-            <div class="divider">⸻</div>
-            
             <form id="atendimentoForm">
-                <div class="question">
-                    <div class="question-title">
-                        <span>1.</span> Qual o seu nome?
+                <div class="question-wrapper active" data-step="1">
+                    <div class="question">
+                        <div class="question-title">
+                            <span>1.</span> Qual o seu nome?
+                        </div>
+                         <input type="text" class="text-input" id="nome" placeholder="Digite seu nome completo" required>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <span>📝</span>
-                        <span style="font-weight: 500;">Campo de texto:</span>
-                    </div>
-                    <input 
-                        type="text" 
-                        class="text-input" 
-                        id="nome" 
-                        placeholder="Me chamo: " 
-                        required
-                    >
-                </div>
-
-                <div class="question">
-                    <div class="question-title">
-                        <span>2.</span> Qual a sua situação atual?
-                    </div>
-                    <p style="margin-bottom: 15px; color: #666; font-style: italic;">(Escolha uma das opções)</p>
-                    
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" name="situacao" id="visita" value="visita" required>
-                            <label for="visita">🔘 Gostaria de um orçamento, mas ainda não tenho as medidas. Desejo agendar uma visita técnica na minha obra.</label>
-                        </div>
-                        
-                        <div class="radio-option">
-                            <input type="radio" name="situacao" id="orcamento" value="orcamento" required>
-                            <label for="orcamento">🔘 Já tenho as medidas e gostaria de receber um orçamento via WhatsApp.</label>
-                        </div>
-                        
-                        <div class="radio-option">
-                            <input type="radio" name="situacao" id="fechar" value="fechar" required>
-                            <label for="fechar">🔘 Já tenho um orçamento e gostaria de fechar meu pedido.</label>
-                        </div>
-                        
-                        <div class="radio-option">
-                            <input type="radio" name="situacao" id="acompanhar" value="acompanhar" required>
-                            <label for="acompanhar">🔘 Já fiz meu pedido e gostaria de acompanhar o andamento.</label>
-                        </div>
+                    <div class="nav-buttons">
+                        <button type="button" class="btn btn-next" onclick="nextStep(2)">Avançar</button>
                     </div>
                 </div>
 
-                <div class="divider">⸻</div>
-
-                <div class="question">
-                    <div class="question-title">
-                        <span>3.</span> Informações adicionais (opcional):
+                <div class="question-wrapper" data-step="2">
+                    <div class="question">
+                        <div class="question-title">
+                            <span>2.</span> Qual a sua situação atual?
+                        </div>
+                        <p style="margin-bottom: 15px; color: #666; font-style: italic;">(Escolha uma das opções)</p>
+                        
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="situacao" id="visita" value="visita" required>
+                                <label for="visita">Gostaria de um orçamento, mas ainda não tenho as medidas. Desejo agendar uma visita técnica.</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="situacao" id="orcamento" value="orcamento" required>
+                                <label for="orcamento">Já tenho as medidas e gostaria de receber um orçamento.</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="situacao" id="fechar" value="fechar" required>
+                                <label for="fechar">Já tenho um orçamento e gostaria de fechar meu pedido.</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="situacao" id="acompanhar" value="acompanhar" required>
+                                <label for="acompanhar">Já fiz meu pedido e gostaria de acompanhar o andamento.</label>
+                            </div>
+                        </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <span>📝</span>
-                        <span style="font-weight: 500;">Campo de texto livre para detalhes:</span>
+                    <div class="nav-buttons">
+                        <button type="button" class="btn btn-prev" onclick="prevStep(1)">Voltar</button>
+                        <button type="button" class="btn btn-next" onclick="nextStep(3)">Avançar</button>
                     </div>
-                    <textarea 
-                        class="textarea" 
-                        id="informacoes" 
-                        placeholder="Ex: tipo de material desejado, ambiente, cidade, prazo etc."
-                    ></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">
-                    <span class="whatsapp-icon">📱</span>
-                    Enviar via WhatsApp
-                </button>
+                <div class="question-wrapper" data-step="3">
+                    <div class="question">
+                        <div class="question-title">
+                            <span>3.</span> Informações adicionais (opcional):
+                        </div>
+                        <textarea class="textarea" id="informacoes" placeholder="Ex: tipo de material desejado, ambiente, cidade, prazo, etc."></textarea>
+                    </div>
+                    <div class="nav-buttons">
+                        <button type="button" class="btn btn-prev" onclick="prevStep(2)">Voltar</button>
+                        <button type="submit" class="btn btn-submit">
+                           ✔️ Enviar Informações
+                        </button>
+                    </div>
+                </div>
             </form>
+            
+            <div id="submission-status" class="hidden"></div>
         </div>
     </div>
 
     <script>
+        let currentStep = 1;
+
+        function showStep(step) {
+            document.querySelectorAll('.question-wrapper').forEach(wrapper => {
+                wrapper.classList.remove('active');
+            });
+            document.querySelector(`.question-wrapper[data-step="${step}"]`).classList.add('active');
+        }
+
+        function nextStep(step) {
+            // Validação da etapa atual antes de avançar
+            if (currentStep === 1) {
+                const nome = document.getElementById('nome').value;
+                if (nome.trim() === '') {
+                    alert('Por favor, preencha o seu nome.');
+                    return;
+                }
+            }
+            if (currentStep === 2) {
+                const situacao = document.querySelector('input[name="situacao"]:checked');
+                if (!situacao) {
+                    alert('Por favor, selecione uma situação.');
+                    return;
+                }
+            }
+
+            currentStep = step;
+            showStep(currentStep);
+        }
+
+        function prevStep(step) {
+            currentStep = step;
+            showStep(currentStep);
+        }
+
         // Adicionar efeitos visuais aos radio buttons
         document.querySelectorAll('.radio-option').forEach(option => {
             option.addEventListener('click', function() {
-                // Remove seleção anterior
                 document.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
-                
-                // Adiciona seleção atual
                 this.classList.add('selected');
-                
-                // Marca o radio button
                 this.querySelector('input[type="radio"]').checked = true;
             });
         });
 
-        // Função para enviar via WhatsApp
-        document.getElementById('atendimentoForm').addEventListener('submit', function(e) {
+        // Função para enviar os dados para o webhook
+        document.getElementById('atendimentoForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+
             const nome = document.getElementById('nome').value;
-            const situacao = document.querySelector('input[name="situacao"]:checked');
+            const situacaoRadio = document.querySelector('input[name="situacao"]:checked');
             const informacoes = document.getElementById('informacoes').value;
-            
-            if (!nome || !situacao) {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-            
-            // Mapear as situações para textos mais limpos
+
             const situacaoTextos = {
-                'visita': 'Gostaria de um orçamento, mas ainda não tenho as medidas. Desejo agendar uma visita técnica na minha obra.',
-                'orcamento': 'Já tenho as medidas e gostaria de receber um orçamento via WhatsApp.',
+                'visita': 'Gostaria de um orçamento, mas ainda não tenho as medidas. Desejo agendar uma visita técnica.',
+                'orcamento': 'Já tenho as medidas e gostaria de receber um orçamento.',
                 'fechar': 'Já tenho um orçamento e gostaria de fechar meu pedido.',
                 'acompanhar': 'Já fiz meu pedido e gostaria de acompanhar o andamento.'
             };
+
+            const data = {
+                nome: nome,
+                situacao: situacaoRadio ? situacaoTextos[situacaoRadio.value] : 'Não informado',
+                informacoesAdicionais: informacoes || 'Nenhuma'
+            };
+
+            const webhookUrl = 'https://igor-n8n.7hn4wr.easypanel.host/webhook/115e931b-c281-41f4-a934-a4877b308af0';
             
-            // Construir mensagem para WhatsApp
-            let mensagem = `*MarmoDecor - Atendimento Inteligente*\n\n`;
-            mensagem += `*Nome:* ${nome}\n\n`;
-            mensagem += `*Situação atual:* ${situacaoTextos[situacao.value]}\n\n`;
-            
-            if (informacoes.trim()) {
-                mensagem += `*Informações adicionais:* ${informacoes}\n\n`;
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    // Esconde o formulário e mostra a mensagem de sucesso
+                    document.getElementById('atendimentoForm').classList.add('hidden');
+                    const statusDiv = document.getElementById('submission-status');
+                    statusDiv.innerHTML = `
+                        <h2>✅ Enviado com Sucesso!</h2>
+                        <p>Obrigado, <strong>${nome}</strong>! Recebemos suas informações e nossa equipe entrará em contato em breve.</p>
+                    `;
+                    statusDiv.classList.remove('hidden');
+                } else {
+                    throw new Error('Falha na resposta do servidor.');
+                }
+
+            } catch (error) {
+                console.error('Erro ao enviar o formulário:', error);
+                const statusDiv = document.getElementById('submission-status');
+                    statusDiv.innerHTML = `
+                        <h2>❌ Erro no Envio</h2>
+                        <p>Houve um problema ao enviar suas informações. Por favor, tente novamente mais tarde ou entre em contato por outro canal.</p>
+                    `;
+                statusDiv.classList.remove('hidden');
+                document.getElementById('atendimentoForm').classList.add('hidden');
             }
-            
-            mensagem += `_Mensagem enviada através do formulário de atendimento_`;
-            
-            // Codificar mensagem para URL
-            const mensagemCodificada = encodeURIComponent(mensagem);
-            
-            // Substituir pelo número do WhatsApp da MarmoDecor
-            const numeroWhatsApp = '5521999999999'; // Substitua pelo número real
-            
-            // Criar link do WhatsApp
-            const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
-            
-            // Abrir WhatsApp
-            window.open(linkWhatsApp, '_blank');
         });
 
-        // Animação suave para os inputs
-        document.querySelectorAll('.text-input, .textarea').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.style.transform = 'scale(1.02)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.style.transform = 'scale(1)';
-            });
-        });
+        // Inicializa o formulário na primeira etapa
+        showStep(currentStep);
     </script>
 </body>
 </html>
