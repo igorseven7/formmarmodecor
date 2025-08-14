@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MarmoDecor - Atendimento Inteligente</title>
     <style>
+        :root {
+            --primary-color: #1e3a5f;
+            --secondary-color: #2c5282;
+            --accent-color: #c8860d;
+            --success-color: #25D366;
+            --success-dark: #128C7E;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e1e8ed;
+            --dark-gray: #666;
+            --white: #ffffff;
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,29 +29,32 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             min-height: 100vh;
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 1.5;
+            color: #333;
         }
 
         .container {
-            background: white;
+            background: var(--white);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
             max-width: 500px;
             width: 100%;
             overflow: hidden;
-            animation: slideIn 0.8s ease-out;
+            animation: slideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, opacity;
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -43,8 +63,8 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
             padding: 30px 25px;
             text-align: center;
         }
@@ -59,14 +79,14 @@
         }
 
         .header h1 {
-            font-size: 28px;
+            font-size: clamp(1.5rem, 5vw, 1.75rem);
             font-weight: 700;
             margin-bottom: 10px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header p {
-            font-size: 16px;
+            font-size: 1rem;
             opacity: 0.9;
             line-height: 1.5;
         }
@@ -76,28 +96,34 @@
         }
 
         .question-wrapper {
-            display: none; /* Esconde todas as perguntas por padrão */
-            animation: fadeIn 0.5s ease-in-out;
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+            will-change: opacity, transform;
         }
         
         .question-wrapper.active {
-            display: block; /* Mostra apenas a pergunta ativa */
+            display: block;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
-
 
         .question {
             margin-bottom: 30px;
         }
 
         .question-title {
-            font-size: 18px;
+            font-size: 1.125rem;
             font-weight: 600;
-            color: #1e3a5f;
+            color: var(--primary-color);
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -107,17 +133,17 @@
         .text-input, .textarea {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e1e8ed;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
+            border: 2px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light-gray);
         }
 
         .text-input:focus, .textarea:focus {
             outline: none;
-            border-color: #c8860d;
-            background: white;
+            border-color: var(--accent-color);
+            background: var(--white);
             box-shadow: 0 0 0 3px rgba(200, 134, 13, 0.1);
         }
 
@@ -132,22 +158,22 @@
             align-items: flex-start;
             gap: 12px;
             padding: 15px;
-            border: 2px solid #e1e8ed;
-            border-radius: 10px;
+            border: 2px solid var(--medium-gray);
+            border-radius: var(--border-radius);
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
+            transition: var(--transition);
+            background: var(--light-gray);
         }
 
         .radio-option:hover {
-            border-color: #c8860d;
-            background: white;
+            border-color: var(--accent-color);
+            background: var(--white);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-sm);
         }
 
         .radio-option.selected {
-            border-color: #c8860d;
+            border-color: var(--accent-color);
             background: #fef9e7;
             box-shadow: 0 5px 15px rgba(200, 134, 13, 0.2);
         }
@@ -155,14 +181,16 @@
         .radio-option input[type="radio"] {
             margin-top: 2px;
             transform: scale(1.2);
-            accent-color: #c8860d;
+            accent-color: var(--accent-color);
+            cursor: pointer;
         }
 
         .radio-option label {
             cursor: pointer;
             line-height: 1.5;
-            font-size: 15px;
-            color: #1e3a5f;
+            font-size: 0.9375rem;
+            color: var(--primary-color);
+            user-select: none;
         }
 
         .textarea {
@@ -175,34 +203,36 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
+            gap: 10px;
         }
 
         .btn {
             padding: 15px 25px;
             border: none;
-            border-radius: 12px;
-            font-size: 16px;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            flex: 1;
+            text-align: center;
         }
 
         .btn-next {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
-            color: white;
-            flex-grow: 1; /* Faz o botão ocupar o espaço todo se for o único */
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
         }
         
         .btn-prev {
-            background-color: #e1e8ed;
-            color: #1e3a5f;
+            background-color: var(--medium-gray);
+            color: var(--primary-color);
         }
         
         .btn-submit {
             width: 100%;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            font-size: 18px;
+            background: linear-gradient(135deg, var(--success-color) 0%, var(--success-dark) 100%);
+            color: var(--white);
+            font-size: 1.125rem;
             padding: 18px;
             display: flex;
             align-items: center;
@@ -212,11 +242,18 @@
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-md);
         }
 
         .btn:active {
             transform: translateY(-1px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
         }
         
         #submission-status {
@@ -226,21 +263,31 @@
         }
 
         #submission-status h2 {
-            color: #1e3a5f;
+            color: var(--primary-color);
             margin-bottom: 15px;
-            font-size: 24px;
+            font-size: 1.5rem;
         }
         
         #submission-status p {
-            color: #666;
-            font-size: 16px;
+            color: var(--dark-gray);
+            font-size: 1rem;
             line-height: 1.6;
         }
 
         .hidden {
+            display: none !important;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 5px;
             display: none;
         }
 
+        .input-error {
+            border-color: #e74c3c !important;
+        }
 
         @media (max-width: 480px) {
             .container {
@@ -254,7 +301,10 @@
                 padding: 25px 20px;
             }
             .header h1 {
-                font-size: 24px;
+                font-size: 1.375rem;
+            }
+            .btn {
+                padding: 12px 20px;
             }
         }
     </style>
@@ -285,7 +335,8 @@
                         <div class="question-title">
                             <span>1.</span> Qual o seu nome?
                         </div>
-                         <input type="text" class="text-input" id="nome" placeholder="Digite seu nome completo" required>
+                        <input type="text" class="text-input" id="nome" placeholder="Digite seu nome completo" required>
+                        <div class="error-message" id="nome-error">Por favor, preencha o seu nome.</div>
                     </div>
                     <div class="nav-buttons">
                         <button type="button" class="btn btn-next" onclick="nextStep(2)">Avançar</button>
@@ -297,7 +348,7 @@
                         <div class="question-title">
                             <span>2.</span> Qual a sua situação atual?
                         </div>
-                        <p style="margin-bottom: 15px; color: #666; font-style: italic;">(Escolha uma das opções)</p>
+                        <p style="margin-bottom: 15px; color: var(--dark-gray); font-style: italic;">(Escolha uma das opções)</p>
                         
                         <div class="radio-group">
                             <div class="radio-option">
@@ -317,6 +368,7 @@
                                 <label for="acompanhar">Já fiz meu pedido e gostaria de acompanhar o andamento.</label>
                             </div>
                         </div>
+                        <div class="error-message" id="situacao-error">Por favor, selecione uma situação.</div>
                     </div>
                     <div class="nav-buttons">
                         <button type="button" class="btn btn-prev" onclick="prevStep(1)">Voltar</button>
@@ -345,75 +397,89 @@
     </div>
 
     <script>
+        // Variáveis globais
         let currentStep = 1;
+        const form = document.getElementById('atendimentoForm');
+        const nomeInput = document.getElementById('nome');
+        const nomeError = document.getElementById('nome-error');
+        const situacaoError = document.getElementById('situacao-error');
+        const whatsappNumber = '22996141811';
+        const whatsappMessage = 'Preenchi o formulário agora';
 
+        // Mostra a etapa atual
         function showStep(step) {
             document.querySelectorAll('.question-wrapper').forEach(wrapper => {
                 wrapper.classList.remove('active');
             });
             document.querySelector(`.question-wrapper[data-step="${step}"]`).classList.add('active');
+            
+            // Rola para o topo do formulário
+            document.querySelector('.form-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
+        // Validação do campo nome
+        function validateNome() {
+            if (nomeInput.value.trim() === '') {
+                nomeInput.classList.add('input-error');
+                nomeError.style.display = 'block';
+                return false;
+            }
+            nomeInput.classList.remove('input-error');
+            nomeError.style.display = 'none';
+            return true;
+        }
+
+        // Validação da situação
+        function validateSituacao() {
+            const situacao = document.querySelector('input[name="situacao"]:checked');
+            if (!situacao) {
+                situacaoError.style.display = 'block';
+                return false;
+            }
+            situacaoError.style.display = 'none';
+            return true;
+        }
+
+        // Avança para a próxima etapa
         function nextStep(step) {
             // Validação da etapa atual antes de avançar
-            if (currentStep === 1) {
-                const nome = document.getElementById('nome').value;
-                if (nome.trim() === '') {
-                    alert('Por favor, preencha o seu nome.');
-                    return;
-                }
-            }
-            if (currentStep === 2) {
-                const situacao = document.querySelector('input[name="situacao"]:checked');
-                if (!situacao) {
-                    alert('Por favor, selecione uma situação.');
-                    return;
-                }
-            }
+            if (currentStep === 1 && !validateNome()) return;
+            if (currentStep === 2 && !validateSituacao()) return;
 
             currentStep = step;
             showStep(currentStep);
         }
 
+        // Volta para a etapa anterior
         function prevStep(step) {
             currentStep = step;
             showStep(currentStep);
         }
 
-        // Adicionar efeitos visuais aos radio buttons
-        document.querySelectorAll('.radio-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-                this.querySelector('input[type="radio"]').checked = true;
+        // Adiciona interação aos radio buttons
+        function setupRadioOptions() {
+            document.querySelectorAll('.radio-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    
+                    // Dispara evento change para validação
+                    const event = new Event('change');
+                    radio.dispatchEvent(event);
+                });
             });
-        });
+        }
 
-        // Função para enviar os dados para o webhook
-        document.getElementById('atendimentoForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitButton = this.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Enviando...';
+        // Redireciona para o WhatsApp
+        function redirectToWhatsApp() {
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            window.location.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+        }
 
-            const nome = document.getElementById('nome').value;
-            const situacaoRadio = document.querySelector('input[name="situacao"]:checked');
-            const informacoes = document.getElementById('informacoes').value;
-
-            const situacaoTextos = {
-                'visita': 'Gostaria de um orçamento, mas ainda não tenho as medidas. Desejo agendar uma visita técnica.',
-                'orcamento': 'Já tenho as medidas e gostaria de receber um orçamento.',
-                'fechar': 'Já tenho um orçamento e gostaria de fechar meu pedido.',
-                'acompanhar': 'Já fiz meu pedido e gostaria de acompanhar o andamento.'
-            };
-
-            const data = {
-                nome: nome,
-                situacao: situacaoRadio ? situacaoTextos[situacaoRadio.value] : 'Não informado',
-                informacoesAdicionais: informacoes || 'Nenhuma'
-            };
-
+        // Envia os dados para o webhook
+        async function submitFormData(data) {
             const webhookUrl = 'https://igor-n8n.7hn4wr.easypanel.host/webhook/115e931b-c281-41f4-a934-a4877b308af0';
             
             try {
@@ -425,33 +491,86 @@
                     body: JSON.stringify(data),
                 });
 
-                if (response.ok) {
-                    // Esconde o formulário e mostra a mensagem de sucesso
-                    document.getElementById('atendimentoForm').classList.add('hidden');
-                    const statusDiv = document.getElementById('submission-status');
-                    statusDiv.innerHTML = `
-                        <h2>✅ Enviado com Sucesso!</h2>
-                        <p>Obrigado, <strong>${nome}</strong>! Recebemos suas informações e nossa equipe entrará em contato em breve.</p>
-                    `;
-                    statusDiv.classList.remove('hidden');
-                } else {
-                    throw new Error('Falha na resposta do servidor.');
-                }
-
+                return response.ok;
             } catch (error) {
                 console.error('Erro ao enviar o formulário:', error);
-                const statusDiv = document.getElementById('submission-status');
-                    statusDiv.innerHTML = `
-                        <h2>❌ Erro no Envio</h2>
-                        <p>Houve um problema ao enviar suas informações. Por favor, tente novamente mais tarde ou entre em contato por outro canal.</p>
-                    `;
-                statusDiv.classList.remove('hidden');
-                document.getElementById('atendimentoForm').classList.add('hidden');
+                return false;
             }
-        });
+        }
 
-        // Inicializa o formulário na primeira etapa
-        showStep(currentStep);
+        // Manipulador de envio do formulário
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Enviando... <span class="spinner"></span>';
+
+            const nome = nomeInput.value.trim();
+            const situacaoRadio = document.querySelector('input[name="situacao"]:checked');
+            const informacoes = document.getElementById('informacoes').value.trim();
+
+            const situacaoTextos = {
+                'visita': 'Agendar visita técnica',
+                'orcamento': 'Receber orçamento',
+                'fechar': 'Fechar pedido',
+                'acompanhar': 'Acompanhar pedido'
+            };
+
+            const formData = {
+                nome: nome,
+                situacao: situacaoRadio ? situacaoTextos[situacaoRadio.value] : 'Não informado',
+                informacoesAdicionais: informacoes || 'Nenhuma',
+                timestamp: new Date().toISOString()
+            };
+
+            // Tenta enviar para o webhook
+            const webhookSuccess = await submitFormData(formData);
+
+            // Esconde o formulário e mostra o status
+            form.classList.add('hidden');
+            const statusDiv = document.getElementById('submission-status');
+            
+            if (webhookSuccess) {
+                statusDiv.innerHTML = `
+                    <h2>✅ Enviado com Sucesso!</h2>
+                    <p>Obrigado, <strong>${nome}</strong>! Recebemos suas informações e nossa equipe entrará em contato em breve.</p>
+                    <button onclick="redirectToWhatsApp()" class="btn btn-submit" style="margin-top: 20px;">
+                        📱 Falar no WhatsApp Agora
+                    </button>
+                `;
+            } else {
+                statusDiv.innerHTML = `
+                    <h2>⚠️ Mensagem Recebida</h2>
+                    <p>Obrigado, <strong>${nome}</strong>! Houve um problema no nosso sistema, mas já registramos seu interesse.</p>
+                    <p>Por favor, clique no botão abaixo para falar diretamente com nosso atendente:</p>
+                    <button onclick="redirectToWhatsApp()" class="btn btn-submit" style="margin-top: 20px;">
+                        📱 Falar no WhatsApp Agora
+                    </button>
+                `;
+            }
+            
+            statusDiv.classList.remove('hidden');
+            
+            // Rola para mostrar o status
+            statusDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configura eventos
+            nomeInput.addEventListener('input', validateNome);
+            document.querySelectorAll('input[name="situacao"]').forEach(radio => {
+                radio.addEventListener('change', validateSituacao);
+            });
+            
+            setupRadioOptions();
+            form.addEventListener('submit', handleFormSubmit);
+            
+            // Mostra a primeira etapa
+            showStep(currentStep);
+        });
     </script>
 </body>
 </html>
